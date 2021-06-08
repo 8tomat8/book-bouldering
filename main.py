@@ -77,7 +77,12 @@ def main(driver: WebDriver):
             continue
 
         # Skipping wrong time
-        timeCol = row.find_element_by_xpath('.//td[@class="timeColumn"]')
+        try:
+            timeCol = row.find_element_by_xpath('.//td[@class="timeColumn"]')
+        except:
+            # skip a row if it has no time column to check
+            pass
+
         if timeCol.text != time_to_book:
             continue
 
