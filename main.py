@@ -64,6 +64,7 @@ def main(driver: WebDriver):
         find_elements_by_tag_name('tr')
 
     time_to_book = args.time + ' uur'
+    found_time = False
     #  for slot in time_slots:
     for row in rows:
         try:
@@ -83,10 +84,14 @@ def main(driver: WebDriver):
         try:
             link = row.find_element_by_xpath('.//td[@class="linkColumn"]/div/a')
         except NoSuchElementException:
-            raise Exception('No link for your time was found :(. Probably all booked')
+            continue
 
         link.click()
+        found_time = True
         break
+
+    if not found_time:
+        raise Exception('No link for your time was found :(. Probably all booked')
 
     # Fourth page (personal data)
     driver.find_element_by_name('booker[firstname]').send_keys(people['name'])
