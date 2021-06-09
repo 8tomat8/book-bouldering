@@ -108,8 +108,8 @@ def main(driver: WebDriver):
     driver.find_element_by_id('birthDateMonth').send_keys(people['birthday']['month'])
     driver.find_element_by_id('birthDateYear').send_keys(people['birthday']['year'])
 
-    btn = driver.find_element_by_tag_name('button')
-    if 'continue' not in btn.text.lower():
+    btn = driver.find_element_by_class_name('navbtnnext')
+    if 'VERDER' not in btn.text.lower():
         raise Exception('Something wrong with the CONTINIE button...')
     
     btn.click()
